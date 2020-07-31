@@ -12,7 +12,8 @@ function preload()
 function setup() {
   createCanvas(1200,700); 
   engine = Engine.create();
-  world = engine.world;
+  world = engine.world; 
+  Engine.run(engine);
   ground = new Ground(600,700,1200,20); 
   stand1 = new Ground(440,400,250,10); 
   stand2 = new Ground(750,300,200,10);  
@@ -57,6 +58,7 @@ function setup() {
 
   
   polygon = Bodies.circle(50,200,20);  
+    
   
   World.add(world,polygon);   
  
@@ -67,7 +69,7 @@ function setup() {
 
 function draw() {
   background(100);  
-  Engine.update(engine);
+  //Engine.update(engine);
   ground.display();   
   stand1.display();
   stand2.display(); 
@@ -101,14 +103,19 @@ function draw() {
   block28.display(); 
 
   slingShot.display();  
-  
+
   imageMode(CENTER);
-  image(polygonIMG,polygon.position.x,polygon.position.y,40,40)
-  drawSprites();
+  image(polygonIMG,polygon.position.x,polygon.position.y,40,40);
+  //drawSprites();
 } 
 function mouseDragged(){
-  Matter.Body.setPosition(polygon.body,{x:mouseX,y:mouseY})
+  Matter.Body.setPosition(this.polygon,{x:mouseX,y:mouseY})
 }
 function mouseReleased(){
   slingShot.fly();
-} 
+}  
+function keyPressed(){
+  if(keyCode===32){
+    slingShot.attach(polygon.body);
+  }
+}
