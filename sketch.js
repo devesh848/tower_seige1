@@ -69,7 +69,7 @@ function setup() {
 
 function draw() {
   background(100);  
-  //Engine.update(engine);
+  Engine.update(engine);
   ground.display();   
   stand1.display();
   stand2.display(); 
@@ -103,9 +103,10 @@ function draw() {
   block28.display(); 
 
   slingShot.display();  
-
+  
   imageMode(CENTER);
-  image(polygonIMG,polygon.position.x,polygon.position.y,40,40);
+  image(polygonIMG,polygon.position.x,polygon.position.y,40,40); 
+  //console.log(polygon.position.x+" and "+polygon.position.y);
   //drawSprites();
 } 
 function mouseDragged(){
@@ -115,7 +116,8 @@ function mouseReleased(){
   slingShot.fly();
 }  
 function keyPressed(){
-  if(keyCode===32){
-    slingShot.attach(polygon.body);
+  if(keyCode===32){  
+    slingShot.attach(this.polygon); 
+    
   }
 }
