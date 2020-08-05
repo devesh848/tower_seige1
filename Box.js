@@ -25,7 +25,7 @@ class Box{
         rect( 0, 0, this.width, this.height); 
         pop();  
         
-        }   
+        }    
         else{ 
           push();
           World.remove(world,this.body);  
@@ -35,5 +35,10 @@ class Box{
         }
 
         
-      } 
+      }  
+      score(){
+        if(this.visbility<0 && this.visbility>-300){
+          score++;
+        }
+      }
 }

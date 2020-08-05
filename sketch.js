@@ -1,16 +1,21 @@
 const Engine = Matter.Engine;
 const World= Matter.World;
 const Bodies = Matter.Bodies;
-const Constraint = Matter.Constraint; 
+const Constraint = Matter.Constraint;  
+var backgroundIMG;
+var score = 0; 
+
 function preload()
-{
+{ 
+  getBackgroundIMG();
 	polygonIMG=loadImage("polygon.png")
 }
 
 
 
 function setup() {
-  createCanvas(1200,700); 
+  createCanvas(1200,700);  
+  
   engine = Engine.create();
   world = engine.world; 
   Engine.run(engine);
@@ -67,13 +72,22 @@ function setup() {
   
 }
 
-function draw() {
-  background(100);  
-  Engine.update(engine);
+function draw() {  
+  
+  if (backgroundIMG) 
+  
+  background(backgroundIMG);  
+  Engine.update(engine);  
+ 
+  textSize(30); 
+  fill("gray"); 
+  text("score"+score,width-200,40); 
+
+
   ground.display();   
   stand1.display();
   stand2.display(); 
-  block1.display(); 
+  block1.display();  
   block2.display(); 
   block3.display();  
   block4.display();
@@ -102,6 +116,35 @@ function draw() {
   block27.display(); 
   block28.display(); 
 
+  block1.score(); 
+  block2.score(); 
+  block3.score(); 
+  block4.score(); 
+  block5.score(); 
+  block6.score(); 
+  block7.score(); 
+  block8.score(); 
+  block9.score(); 
+  block10.score(); 
+  block11.score(); 
+  block12.score(); 
+  block13.score(); 
+  block14.score(); 
+  block15.score(); 
+  block16.score(); 
+  block17.score(); 
+  block18.score(); 
+  block19.score(); 
+  block20.score(); 
+  block21.score(); 
+  block22.score(); 
+  block23.score(); 
+  block24.score(); 
+  block25.score(); 
+  block26.score(); 
+  block27.score(); 
+  block28.score();
+
   slingShot.display();  
   
   imageMode(CENTER);
@@ -120,4 +163,18 @@ function keyPressed(){
     slingShot.attach(this.polygon); 
     
   }
+} 
+async function getBackgroundIMG(){
+  var response = await fetch("http://worldtimeapi.org/api/timezone/Asia/kolkata"); 
+  var responseJSON = await response.json(); 
+  var dateTime = responseJSON.datetime;
+  var hour = dateTime.slice(11,13); 
+  if(hour>=6 && hour<=12){
+    bg = "bg.png" 
+    
+  } else {
+    bg = "bg2.jpg" ; 
+    
+  } 
+  backgroundIMG = loadImage(bg);
 }
